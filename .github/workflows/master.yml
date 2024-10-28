@@ -35,6 +35,7 @@ jobs:
           password: ${{ secrets.SSH_KEY }}
           
           script: |
+            cd docker-jenkins-ci-cd
             docker image pull enoobongenoh25/vank:latest
             docker compose down
             docker compose up --build -d
