@@ -1,4 +1,4 @@
-me: Create image
+name: Create image
 
 on:
   push:
