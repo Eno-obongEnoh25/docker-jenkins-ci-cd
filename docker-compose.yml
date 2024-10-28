@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: eenoh_frontend
     container_name: app
     ports:
       - 80:80
