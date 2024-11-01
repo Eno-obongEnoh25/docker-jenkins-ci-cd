@@ -1,0 +1,42 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t enoobongenoh25/vank .
+          docker tag enoobongenoh25/vank ${{ secrets.DOCKERHUB_USERNAME }}/enoobongenoh25/vank:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/enoobongenoh25/vank:latest
+
+      - name: Deploy to EC2
+        env:
+          HOST: "54.81.181.135"  # Adjust with the correct username and IP
+        run: |
+          ssh -o StrictHostKeyChecking=no $HOST << EOF
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/enoobongenoh25/vank:latestt
+            docker stop current-container || true
+            docker rm current-container || true
+            docker run -d --name current-container ${{ secrets.DOCKERHUB_USERNAME }}/enoobongenoh25/vank:latestt
+          EOF
