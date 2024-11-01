@@ -27,7 +27,7 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           docker build -t enoobongenoh25/vank .
-          docker tag your-image-name your-dockerhub-username/your-image-name:latest
+          docker tag enoobongenoh25/vank ${{ secrets.DOCKERHUB_USERNAME }}/enoobongenoh25/vank:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/enoobongenoh25/vank:latestt
 
       - name: Deploy to EC2
