@@ -28,7 +28,7 @@ jobs:
         run: |
           docker build -t enoobongenoh25/vank .
           docker tag enoobongenoh25/vank ${{ secrets.DOCKERHUB_USERNAME }}/enoobongenoh25/vank:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/enoobongenoh25/vank:latestt
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/enoobongenoh25/vank:latest
 
       - name: Deploy to EC2
         env:
