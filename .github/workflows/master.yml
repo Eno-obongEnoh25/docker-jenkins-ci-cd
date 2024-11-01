@@ -25,7 +25,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: latest
+          tags: enoobongenoh25/vank:latest
           
       - name: deploying
         uses: appleboy/ssh-action@master
@@ -36,7 +36,7 @@ jobs:
           
           script: |
             cd docker-jenkins-ci-cd
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/enoobongenoh25/vank
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/enoobongenoh25/vank:latest
             docker stop eenoh || true
             docker rm eenoh || true
             docker run -d --name eenoh -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/enoobongenoh25/vank:latest
