@@ -12,7 +12,7 @@ defineProps({
     <h1 class="green">{{ msg }}</h1>
     <h3>
       enoobongetukenoh.com
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Docker</a> +
+      <a href="https://vitejs.dev/" target="_blank" rel="noopener"> is a Docker</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Ninja</a>.
     </h3>
   </div>
